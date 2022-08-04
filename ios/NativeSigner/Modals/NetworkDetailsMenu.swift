@@ -10,7 +10,7 @@ import SwiftUI
 struct NetworkDetailsMenu: View {
     @State var removeNetworkAlert = false
 
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
     var body: some View {
         MenuStack {
             HeaderBar(line1: "MANAGE NETWORK", line2: "Select action").padding(.top, 10)
@@ -19,7 +19,7 @@ struct NetworkDetailsMenu: View {
                     text: "Sign network specs",
                     isShaded: true,
                     isCrypto: true,
-                    action: { pushButton(.signNetworkSpecs, "", "") }
+                    action: { pushButton(.signNetworkSpecs) }
                 )
                 BigButton(
                     text: "Delete network",
@@ -31,7 +31,7 @@ struct NetworkDetailsMenu: View {
         }
         .gesture(DragGesture().onEnded { drag in
             if drag.translation.height > 40 {
-                pushButton(.goBack, "", "")
+                pushButton(.goBack)
             }
         })
         .alert(isPresented: $removeNetworkAlert, content: {
@@ -41,7 +41,7 @@ struct NetworkDetailsMenu: View {
                 primaryButton: .cancel(Text("Cancel")),
                 secondaryButton: .destructive(
                     Text("Remove network"),
-                    action: { pushButton(.removeNetwork, "", "") }
+                    action: { pushButton(.removeNetwork) }
                 )
             )
         })

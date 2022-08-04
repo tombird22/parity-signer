@@ -13,11 +13,13 @@ import Foundation
 /// Slightly non-trivial navigation
 /// We should keep this to minimum
 extension SignerDataModel {
-    func pushButton(action: Action, details: String = "", seedPhrase: String = "") {
+    func pushButton(action: Action, details: String? = nil, seedPhrase: String? = nil) {
         // Poor man's mutex; just because it's really managed by UI abstraction
         if actionAvailable {
             /// No returns below or things will stall! *
             actionAvailable = false
+            let details = details ?? ""
+            let seedPhrase = seedPhrase ?? ""
             if let tempActionResult = try? backendAction(action: action, details: details, seedPhrase: seedPhrase) {
                 switch tempActionResult.modalData {
                 case let .sufficientCryptoReady(value):

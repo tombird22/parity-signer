@@ -11,7 +11,7 @@ struct ModalSelector: View {
     let modalData: ModalData?
     let alert: Bool
     let alertShow: () -> Void
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action, String?) -> Void
     let removeSeed: (String) -> Void
     let restoreSeed: (String, String, Bool) -> Void
     let createAddress: (String, String) -> Void
@@ -24,7 +24,7 @@ struct ModalSelector: View {
             NewSeedMenu(
                 alert: alert,
                 alertShow: alertShow,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, nil) }
             )
         case let .networkSelector(value):
             NetworkManager(
@@ -37,14 +37,14 @@ struct ModalSelector: View {
                 alert: alert,
                 alertShow: alertShow,
                 removeSeed: removeSeed,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, nil) }
             )
         case let .backup(value):
             Backup(
                 content: value,
                 alert: alert,
                 getSeedForBackup: getSeedForBackup,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, nil) }
             )
         case let .passwordConfirm(value):
             PasswordConfirm(
@@ -54,7 +54,7 @@ struct ModalSelector: View {
         case let .signatureReady(value):
             SignatureReady(
                 content: value,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, nil) }
             )
         case let .enterPassword(value):
             EnterPassword(
@@ -64,33 +64,33 @@ struct ModalSelector: View {
         case let .logRight(value):
             LogMenu(
                 content: value,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, nil) }
             )
         case .networkDetailsMenu:
             NetworkDetailsMenu(
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, nil) }
             )
         case let .manageMetadata(value):
             ManageMetadata(
                 content: value,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, nil) }
             )
         case let .sufficientCryptoReady(value):
             SufficientCryptoReady(content: value)
         case .keyDetailsAction:
             KeyMenu(
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, nil) }
             )
         case let .typesInfo(value):
             TypesMenu(
                 content: value,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, nil) }
             )
         case let .newSeedBackup(value):
             NewSeedBackupModal(
                 content: value,
                 restoreSeed: restoreSeed,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, nil) }
             )
         case .logComment:
             LogComment(
@@ -100,7 +100,7 @@ struct ModalSelector: View {
             SelectSeed(
                 content: value,
                 sign: sign,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, nil) }
             )
         case nil:
             EmptyView()

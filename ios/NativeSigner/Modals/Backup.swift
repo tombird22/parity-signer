@@ -11,7 +11,7 @@ struct Backup: View {
     let content: MBackup
     let alert: Bool
     let getSeedForBackup: (String) -> String
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
     @State var secret: String = ""
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State var countdown = 60
@@ -26,7 +26,7 @@ struct Backup: View {
                         Spacer()
                         Button(
                             action: {
-                                pushButton(.goBack, "", "")
+                                pushButton(.goBack)
                             },
                             label: {
                                 Image(systemName: "xmark").imageScale(.large).foregroundColor(Color("Text300"))

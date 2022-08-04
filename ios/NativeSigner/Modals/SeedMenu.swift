@@ -13,7 +13,7 @@ struct SeedMenu: View {
     let alert: Bool
     let alertShow: () -> Void
     let removeSeed: (String) -> Void
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
     var body: some View {
         MenuStack {
             HeaderBar(line1: "SEED MENU", line2: "Select action").padding(.top, 10)
@@ -21,7 +21,7 @@ struct SeedMenu: View {
                 BigButton(
                     text: "Backup",
                     action: {
-                        pushButton(.backupSeed, "", "")
+                        pushButton(.backupSeed)
                     }
                 )
                 BigButton(
@@ -30,7 +30,7 @@ struct SeedMenu: View {
                     isCrypto: true,
                     action: {
                         if alert { alertShow() } else {
-                            pushButton(.newKey, "", "")
+                            pushButton(.newKey)
                         }
                     }
                 )

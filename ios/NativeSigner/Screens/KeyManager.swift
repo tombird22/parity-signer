@@ -13,7 +13,7 @@ struct KeyManager: View {
     let alert: Bool
     let alertShow: () -> Void
     let increment: (String, String) -> Void
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action, String?) -> Void
     @State var searchString: String = "" // This is supposed to be used with search, which is disabled now
     var body: some View {
         ZStack {
@@ -21,7 +21,7 @@ struct KeyManager: View {
                 ZStack {
                     Button(
                         action: {
-                            pushButton(.selectKey, content.root.addressKey, "")
+                            pushButton(.selectKey, content.root.addressKey)
                         },
                         label: {
                             SeedKeyCard(
@@ -33,7 +33,7 @@ struct KeyManager: View {
                                     .onEnded { drag in
                                         if abs(drag.translation.height) < 20, abs(drag.translation.width) > 20 {
                                             if !content.root.addressKey.isEmpty {
-                                                pushButton(.swipe, content.root.addressKey, "")
+                                                pushButton(.swipe, content.root.addressKey)
                                             }
                                         }
                                     }
@@ -42,7 +42,7 @@ struct KeyManager: View {
                                 LongPressGesture()
                                     .onEnded { _ in
                                         if !content.root.addressKey.isEmpty {
-                                            pushButton(.longTap, content.root.addressKey, "")
+                                            pushButton(.longTap, content.root.addressKey)
                                         }
                                     }
                             )
@@ -56,12 +56,12 @@ struct KeyManager: View {
                             increment: { details in
                                 increment(content.root.seedName, details)
                             },
-                            pushButton: pushButton
+                            pushButton: { self.pushButton($0, nil) }
                         )
                     }
                 }
                 Button(
-                    action: { pushButton(.networkSelector, "", "") },
+                    action: { pushButton(.networkSelector, nil) },
                     label: {
                         HStack {
                             NetworkCard(title: content.network.title, logo: content.network.logo)
@@ -78,7 +78,7 @@ struct KeyManager: View {
                             if alert {
                                 alertShow()
                             } else {
-                                pushButton(.newKey, "", "")
+                                pushButton(.newKey, nil)
                             }
                         },
                         label: {
@@ -94,7 +94,7 @@ struct KeyManager: View {
                             ZStack {
                                 Button(
                                     action: {
-                                        pushButton(.selectKey, address.addressKey, "")
+                                        pushButton(.selectKey, address.addressKey)
                                     },
                                     label: {
                                         AddressCard(
@@ -111,13 +111,13 @@ struct KeyManager: View {
                                         .gesture(DragGesture().onEnded { drag in
                                             if abs(drag.translation.height) < 20,
                                                abs(drag.translation.width) > 20 {
-                                                pushButton(.swipe, address.addressKey, "")
+                                                pushButton(.swipe, address.addressKey)
                                             }
                                         })
                                         .gesture(
                                             LongPressGesture()
                                                 .onEnded { _ in
-                                                    pushButton(.longTap, address.addressKey, "")
+                                                    pushButton(.longTap, address.addressKey)
                                                 }
                                         )
                                     }
@@ -128,7 +128,7 @@ struct KeyManager: View {
                                         increment: { details in
                                             increment(content.root.seedName, details)
                                         },
-                                        pushButton: pushButton
+                                        pushButton: { self.pushButton($0, nil) }
                                     )
                                 }
                             }
@@ -139,7 +139,7 @@ struct KeyManager: View {
                 if content.multiselectMode {
                     MultiselectBottomControl(
                         selectedCount: content.multiselectCount,
-                        pushButton: pushButton
+                        pushButton: { self.pushButton($0, nil) }
                     )
                 } else {
                     // SearchKeys(searchString: $searchString)

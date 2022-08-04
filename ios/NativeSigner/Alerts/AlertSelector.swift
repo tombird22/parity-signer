@@ -12,7 +12,7 @@ struct AlertSelector: View {
     let alertData: AlertData?
     let canaryDead: Bool
     let resetAlert: () -> Void
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
 
     var body: some View {
         switch alertData {
@@ -22,7 +22,7 @@ struct AlertSelector: View {
             ErrorAlert(pushButton: pushButton, content: value)
         case let .shield(value):
             ShieldAlertComponent(resetAlert: resetAlert, pushButton: pushButton, canaryDead: canaryDead, content: value)
-        case .confirm: // (let value):
+        case .confirm:
             let value = "TODO"
             ConfirmAlert(pushButton: pushButton, content: value)
         }

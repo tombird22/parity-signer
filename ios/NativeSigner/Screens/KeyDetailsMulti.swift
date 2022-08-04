@@ -12,7 +12,7 @@ struct KeyDetailsMulti: View {
     @State var offset: CGFloat = 0
     @State var showDetails = false
     var content: MKeyDetailsMulti
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
     var body: some View {
         ScrollView {
             VStack {
@@ -42,10 +42,10 @@ struct KeyDetailsMulti: View {
                         showDetails.toggle()
                     } else {
                         if drag.translation.width > 20 {
-                            pushButton(.nextUnit, "", "")
+                            pushButton(.nextUnit)
                         }
                         if drag.translation.width < -20 {
-                            pushButton(.previousUnit, "", "")
+                            pushButton(.previousUnit)
                         }
                     }
                 }

@@ -11,7 +11,7 @@ struct ScreenSelector: View {
     let screenData: ScreenData
     let appVersion: String?
     let alert: Bool
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action, String?, String?) -> Void
     let getSeed: (String) -> String
     let doJailbreak: () -> Void
     let pathCheck: (String, String, String) -> DerivationCheck
@@ -27,7 +27,7 @@ struct ScreenSelector: View {
         switch screenData {
         case .scan:
             TransactionScreen(
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, $1, nil) }
             )
         case let .keys(value):
             KeyManager(
@@ -35,19 +35,19 @@ struct ScreenSelector: View {
                 alert: alert,
                 alertShow: alertShow,
                 increment: increment,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, $1, nil) }
             )
         case let .settings(value):
             SettingsScreen(
                 content: value,
                 appVersion: appVersion,
                 doWipe: doWipe,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, nil, nil) }
             )
         case let .log(value):
             HistoryScreen(
                 content: value,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, $1, nil) }
             )
         case let .logDetails(value):
             EventDetails(content: value)
@@ -55,12 +55,12 @@ struct ScreenSelector: View {
             TransactionPreview(
                 content: value,
                 sign: sign,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, nil, nil) }
             )
         case let .seedSelector(value):
             SeedManager(
                 content: value,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, $1, nil) }
             )
         case let .keyDetails(value):
             ExportAddress(content: value)
@@ -68,26 +68,26 @@ struct ScreenSelector: View {
             NewSeedScreen(
                 content: value,
                 checkSeedCollision: checkSeedCollision,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, $1, nil) }
             )
         case let .recoverSeedName(value):
             RecoverSeedName(
                 content: value,
                 checkSeedCollision: checkSeedCollision,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, $1, nil) }
             )
         case let .recoverSeedPhrase(value):
             RecoverSeedPhrase(
                 content: value,
                 restoreSeed: restoreSeed,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, $1, nil) }
             )
         case let .deriveKey(value):
             NewAddressScreen(
                 content: value,
                 pathCheck: pathCheck,
                 createAddress: createAddress,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, $1, nil) }
             )
         case let .vVerifier(value):
             VerifierScreen(
@@ -97,12 +97,12 @@ struct ScreenSelector: View {
         case let .manageNetworks(value):
             ManageNetworks(
                 content: value,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, $1, nil) }
             )
         case let .nNetworkDetails(value):
             NetworkDetails(
                 content: value,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, $1, nil) }
             )
         case let .signSufficientCrypto(value):
             SignSufficientCrypto(
@@ -113,14 +113,14 @@ struct ScreenSelector: View {
         case let .selectSeedForBackup(value):
             SelectSeedForBackup(
                 content: value,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, $1, nil) }
             )
         case .documents:
             DocumentModal()
         case let .keyDetailsMulti(value):
             KeyDetailsMulti(
                 content: value,
-                pushButton: pushButton
+                pushButton: { self.pushButton($0, nil, nil) }
             )
         }
     }

@@ -10,7 +10,7 @@ import SwiftUI
 struct TypesMenu: View {
     var content: MTypesInfo
 
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
     @State var removeTypesAlert = false
     var body: some View {
         MenuStack {
@@ -28,7 +28,7 @@ struct TypesMenu: View {
                     text: "Sign types",
                     isShaded: true,
                     isCrypto: true,
-                    action: { pushButton(.signTypes, "", "") }
+                    action: { pushButton(.signTypes) }
                 )
                 BigButton(
                     text: "Delete types",
@@ -40,7 +40,7 @@ struct TypesMenu: View {
         }
         .gesture(DragGesture().onEnded { drag in
             if drag.translation.height > 40 {
-                pushButton(.goBack, "", "")
+                pushButton(.goBack)
             }
         })
         .alert(isPresented: $removeTypesAlert, content: {
@@ -52,7 +52,7 @@ struct TypesMenu: View {
                 primaryButton: .cancel(Text("Cancel")),
                 secondaryButton: .destructive(
                     Text("Remove types"),
-                    action: { pushButton(.removeTypes, "", "") }
+                    action: { pushButton(.removeTypes) }
                 )
             )
         })

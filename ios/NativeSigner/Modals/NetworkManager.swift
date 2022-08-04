@@ -9,12 +9,12 @@ import SwiftUI
 
 struct NetworkManager: View {
     let content: MNetworkMenu
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action, String?) -> Void
     var body: some View {
         VStack {
             Rectangle().frame(height: UIScreen.main.bounds.height / 3).opacity(0.0001)
                 .gesture(TapGesture().onEnded { _ in
-                    pushButton(.goBack, "", "")
+                    pushButton(.goBack, nil)
                 })
             ZStack {
                 RoundedRectangle(cornerRadius: 20.0).foregroundColor(Color("Bg000"))
@@ -30,7 +30,7 @@ struct NetworkManager: View {
                                 ZStack {
                                     Button(
                                         action: {
-                                            pushButton(.changeNetwork, network.key, "")
+                                            pushButton(.changeNetwork, network.key)
                                         },
                                         label: {
                                             NetworkCard(title: network.title, logo: network.logo, fancy: true)

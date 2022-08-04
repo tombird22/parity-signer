@@ -12,7 +12,7 @@ struct NewSeedScreen: View {
     @FocusState private var nameFocused: Bool
     let content: MNewSeed
     let checkSeedCollision: (String) -> Bool
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action, String) -> Void
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -31,7 +31,7 @@ struct NewSeedScreen: View {
                     .onSubmit {
                         nameFocused = false
                         if !seedName.isEmpty, !checkSeedCollision(seedName) {
-                            pushButton(.goForward, seedName, "")
+                            pushButton(.goForward, seedName)
                         }
                     }
                     .onAppear(perform: {
@@ -45,7 +45,7 @@ struct NewSeedScreen: View {
                 text: "Generate seed phrase",
                 action: {
                     nameFocused = false
-                    pushButton(.goForward, seedName, "")
+                    pushButton(.goForward, seedName)
                 },
                 isDisabled: (seedName.isEmpty) || checkSeedCollision(seedName)
             )

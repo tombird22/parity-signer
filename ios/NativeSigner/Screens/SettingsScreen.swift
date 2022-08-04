@@ -13,12 +13,12 @@ struct SettingsScreen: View {
     let content: MSettings
     let appVersion: String?
     let doWipe: () -> Void
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
     var body: some View {
         VStack(spacing: 2) {
             Button(
                 action: {
-                    pushButton(.manageNetworks, "", "")
+                    pushButton(.manageNetworks)
                 },
                 label: {
                     SettingsCardTemplate(text: "Networks")
@@ -26,14 +26,14 @@ struct SettingsScreen: View {
             )
             Button(
                 action: {
-                    pushButton(.backupSeed, "", "")
+                    pushButton(.backupSeed)
                 },
                 label: {
                     SettingsCardTemplate(text: "Backup keys")
                 }
             )
             Button(
-                action: { pushButton(.viewGeneralVerifier, "", "") },
+                action: { pushButton(.viewGeneralVerifier) },
                 label: {
                     VStack {
                         HStack {
@@ -96,7 +96,7 @@ struct SettingsScreen: View {
             })
             Button(
                 action: {
-                    pushButton(.showDocuments, "", "")
+                    pushButton(.showDocuments)
                 },
                 label: {
                     SettingsCardTemplate(text: "About")

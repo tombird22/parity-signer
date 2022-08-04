@@ -14,7 +14,7 @@ struct RecoverSeedPhrase: View {
     @FocusState private var focus: Bool
     let content: MRecoverSeedPhrase
     let restoreSeed: (String, String, Bool) -> Void
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action, String) -> Void
 
     var body: some View {
         ZStack {
@@ -45,7 +45,7 @@ struct RecoverSeedPhrase: View {
                                     .keyboardType(.asciiCapable)
                                     .submitLabel(.done)
                                     .onChange(of: userInput, perform: { word in
-                                        pushButton(.textEntry, word, "")
+                                        pushButton(.textEntry, word)
                                         shadowUserInput = word
                                     })
                                     .onSubmit {}
@@ -71,7 +71,7 @@ struct RecoverSeedPhrase: View {
                                     VStack {
                                         Button(
                                             action: {
-                                                pushButton(.pushWord, guess, "")
+                                                pushButton(.pushWord, guess)
                                             },
                                             label: {
                                                 Text(guess)

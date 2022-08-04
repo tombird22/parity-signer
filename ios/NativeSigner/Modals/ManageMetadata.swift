@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ManageMetadata: View {
     var content: MManageMetadata
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
     @State var removeMetadataAlert = false
     @State var offset: CGFloat = 0
     var body: some View {
@@ -44,7 +44,7 @@ struct ManageMetadata: View {
                     text: "Sign this metadata",
                     isShaded: true,
                     isCrypto: true,
-                    action: { pushButton(.signMetadata, "", "") }
+                    action: { pushButton(.signMetadata) }
                 )
                 BigButton(
                     text: "Delete this metadata",
@@ -63,7 +63,7 @@ struct ManageMetadata: View {
                 .onEnded { drag in
                     if drag.translation.height > 40 {
                         self.offset = UIScreen.main.bounds.size.height
-                        pushButton(.goBack, "", "")
+                        pushButton(.goBack)
                     }
                 }
         )
@@ -74,7 +74,7 @@ struct ManageMetadata: View {
                 primaryButton: .cancel(Text("Cancel")),
                 secondaryButton: .destructive(
                     Text("Remove metadata"),
-                    action: { pushButton(.removeMetadata, "", "") }
+                    action: { pushButton(.removeMetadata) }
                 )
             )
         })

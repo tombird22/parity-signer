@@ -10,7 +10,7 @@ import SwiftUI
 struct LogMenu: View {
     @State var clearConfirm = false
     var content: MLogRight
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
     var body: some View {
         VStack {
             Spacer()
@@ -20,7 +20,7 @@ struct LogMenu: View {
                     BigButton(
                         text: "Add note",
                         action: {
-                            pushButton(.createLogComment, "", "")
+                            pushButton(.createLogComment)
                         }
                     )
                     BigButton(
@@ -43,7 +43,7 @@ struct LogMenu: View {
                     primaryButton: .cancel(Text("Cancel")),
                     secondaryButton: .destructive(
                         Text("Clear log"),
-                        action: { pushButton(.clearLog, "", "") }
+                        action: { pushButton(.clearLog) }
                     )
                 )
             })

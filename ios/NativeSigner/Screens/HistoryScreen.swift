@@ -10,7 +10,7 @@ import SwiftUI
 struct HistoryScreen: View {
     @EnvironmentObject var data: SignerDataModel
     let content: MLog
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action, String) -> Void
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 8) {
@@ -20,8 +20,7 @@ struct HistoryScreen: View {
                             action: {
                                 pushButton(
                                     .showLogDetails,
-                                    String(content.log.reversed().firstIndex(of: history) ?? 0),
-                                    ""
+                                    String(content.log.reversed().firstIndex(of: history) ?? 0)
                                 )
                             },
                             label: {

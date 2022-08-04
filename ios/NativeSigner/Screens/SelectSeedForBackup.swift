@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SelectSeedForBackup: View {
     let content: MSeeds
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action, String) -> Void
     var body: some View {
         VStack {
             ScrollView {
@@ -21,7 +21,7 @@ struct SelectSeedForBackup: View {
                         HStack {
                             Button(
                                 action: {
-                                    pushButton(.backupSeed, seedNameCard.seedName, "")
+                                    pushButton(.backupSeed, seedNameCard.seedName)
                                 },
                                 label: {
                                     SeedCardForManager(seedNameCard: seedNameCard)

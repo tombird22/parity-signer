@@ -25,12 +25,12 @@ struct WrenchSymbol: View {
 
 struct Footer: View {
     let footerButton: FooterButton?
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
     var body: some View {
         HStack {
             Button(
                 action: {
-                    pushButton(.navbarLog, "", "")
+                    pushButton(.navbarLog)
                 },
                 label: {
                     VStack(alignment: .center) {
@@ -45,7 +45,7 @@ struct Footer: View {
             Spacer()
             Button(
                 action: {
-                    pushButton(.navbarScan, "", "")
+                    pushButton(.navbarScan)
                 },
                 label: {
                     VStack {
@@ -60,7 +60,7 @@ struct Footer: View {
             Spacer()
             Button(
                 action: {
-                    pushButton(.navbarKeys, "", "")
+                    pushButton(.navbarKeys)
                 },
                 label: {
                     VStack {
@@ -73,7 +73,7 @@ struct Footer: View {
             Spacer()
             Button(
                 action: {
-                    pushButton(.navbarSettings, "", "")
+                    pushButton(.navbarSettings)
                 },
                 label: {
                     VStack {

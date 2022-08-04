@@ -14,7 +14,7 @@ struct TransactionPreview: View {
     @FocusState private var focus: Bool
     let content: MTransaction
     let sign: (String, String) -> Void
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
     var body: some View {
         VStack {
             TransactionBlock(cards: content.content.assemble())
@@ -67,7 +67,7 @@ struct TransactionPreview: View {
                         BigButton(
                             text: "Approve",
                             action: {
-                                pushButton(.goForward, "", "")
+                                pushButton(.goForward)
                             }
                         )
                     case .read:
@@ -77,7 +77,7 @@ struct TransactionPreview: View {
                             text: "Select seed",
                             isCrypto: true,
                             action: {
-                                pushButton(.goForward, "", "")
+                                pushButton(.goForward)
                             }
                         )
                     case .done:
@@ -90,7 +90,7 @@ struct TransactionPreview: View {
                             isDangerous: true,
                             action: {
                                 focus = false
-                                pushButton(.goBack, "", "")
+                                pushButton(.goBack)
                             }
                         )
                     }

@@ -13,7 +13,7 @@ struct CameraView: View {
     @State var total: Int? = 0
     @State var captured: Int? = 0
     @State var resetCameraTrigger: Bool = false
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action, String) -> Void
     let size = UIScreen.main.bounds.size.width
     var body: some View {
         ZStack {
@@ -30,7 +30,7 @@ struct CameraView: View {
                     .onReceive(model.$payload, perform: { payload in
                         if payload != nil {
                             DispatchQueue.main.async {
-                                pushButton(.transactionFetched, payload ?? "", "")
+                                pushButton(.transactionFetched, payload ?? "")
                             }
                         }
                     })

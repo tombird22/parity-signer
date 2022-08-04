@@ -12,7 +12,7 @@ struct SignatureReady: View {
     @State var offset: CGFloat = 0
     @State var oldOffset: CGFloat = UIScreen.main.bounds.size.width
     var content: MSignatureReady
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 8).foregroundColor(Color("Bg000"))
@@ -23,7 +23,7 @@ struct SignatureReady: View {
                     .aspectRatio(contentMode: .fit).padding(12)
                 Spacer()
                 BigButton(text: "Done", action: {
-                    pushButton(.goBack, "", "")
+                    pushButton(.goBack)
                 })
             }.padding(16)
         }

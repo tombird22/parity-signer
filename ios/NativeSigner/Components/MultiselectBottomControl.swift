@@ -11,7 +11,7 @@ import SwiftUI
 struct MultiselectBottomControl: View {
     @State var delete = false
     var selectedCount: String
-    var pushButton: (Action, String, String) -> Void
+    var pushButton: (Action) -> Void
     var body: some View {
         ZStack {
             HStack {
@@ -32,7 +32,7 @@ struct MultiselectBottomControl: View {
                         secondaryButton: .destructive(
                             Text("Delete"),
                             action: {
-                                pushButton(.removeKey, "", "")
+                                pushButton(.removeKey)
                             }
                         )
                     )
@@ -40,7 +40,7 @@ struct MultiselectBottomControl: View {
                 Spacer()
                 Button(
                     action: {
-                        pushButton(.exportMultiSelect, "", "")
+                        pushButton(.exportMultiSelect)
                     },
                     label: {
                         SmallButton(text: "Export")

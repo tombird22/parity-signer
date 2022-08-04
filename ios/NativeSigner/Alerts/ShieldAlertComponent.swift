@@ -10,7 +10,7 @@ import SwiftUI
 struct ShieldAlertComponent: View {
     @State var show = true
     let resetAlert: () -> Void
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
     let canaryDead: Bool
     let content: ShieldAlert?
     var body: some View {
@@ -21,7 +21,7 @@ struct ShieldAlertComponent: View {
                         "Network connected!",
                         isPresented: $show,
                         actions: {
-                            Button("Ok") { pushButton(.goBack, "", "") }
+                            Button("Ok") { pushButton(.goBack) }
                         },
                         message: {
                             Text(
@@ -38,7 +38,7 @@ struct ShieldAlertComponent: View {
                             "Network was connected!",
                             isPresented: $show,
                             actions: {
-                                Button("Back") { pushButton(.goBack, "", "") }
+                                Button("Back") { pushButton(.goBack) }
                                 Button("Acknowledge and reset") {
                                     resetAlert()
                                 }
@@ -58,7 +58,7 @@ struct ShieldAlertComponent: View {
                             "Signer is secure",
                             isPresented: $show,
                             actions: {
-                                Button("Ok") { pushButton(.goBack, "", "") }
+                                Button("Ok") { pushButton(.goBack) }
                             },
                             message: {
                                 Text("Please proceed")

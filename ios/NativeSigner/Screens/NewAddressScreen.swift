@@ -14,7 +14,7 @@ struct NewAddressScreen: View {
     var content: MDeriveKey
     let pathCheck: (String, String, String) -> DerivationCheck
     let createAddress: (String, String) -> Void
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action, String) -> Void
 
     var body: some View {
         ZStack {
@@ -42,7 +42,7 @@ struct NewAddressScreen: View {
                                     case .pin:
                                         createAddress(path, content.seedName)
                                     case .pwd:
-                                        pushButton(.checkPassword, path, "")
+                                        pushButton(.checkPassword, path)
                                     default:
                                         break
                                     }
@@ -69,7 +69,7 @@ struct NewAddressScreen: View {
                             case .pin:
                                 createAddress(path, content.seedName)
                             case .pwd:
-                                pushButton(.checkPassword, path, "")
+                                pushButton(.checkPassword, path)
                             default:
                                 break
                             }

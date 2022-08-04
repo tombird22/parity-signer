@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NetworkDetails: View {
     let content: MNetworkDetails
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action, String) -> Void
     var body: some View {
         ZStack {
             VStack {
@@ -62,7 +62,7 @@ struct NetworkDetails: View {
                         ForEach(content.meta, id: \.metaHash) { metaEntry in
                             Button(
                                 action: {
-                                    pushButton(.manageMetadata, metaEntry.specsVersion, "")
+                                    pushButton(.manageMetadata, metaEntry.specsVersion)
                                 },
                                 label: {
                                     MetadataCard(meta: metaEntry)

@@ -10,7 +10,7 @@ import SwiftUI
 struct NewSeedBackupModal: View {
     let content: MNewSeedBackup
     let restoreSeed: (String, String, Bool) -> Void
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
     @State var confirmBackup = false
     @State var createRoots = true
     var body: some View {

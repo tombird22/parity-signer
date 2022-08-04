@@ -10,7 +10,7 @@ import SwiftUI
 struct AddressCardControls: View {
     let seedName: String
     let increment: (String) -> Void
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
     var rowHeight: CGFloat = 39
     @State private var delete = false
     @State private var count: CGFloat = 1
@@ -58,7 +58,7 @@ struct AddressCardControls: View {
                             primaryButton: .cancel(),
                             secondaryButton: .destructive(
                                 Text("Delete"),
-                                action: { pushButton(.removeKey, "", "") }
+                                action: { pushButton(.removeKey) }
                             )
                         )
                     })

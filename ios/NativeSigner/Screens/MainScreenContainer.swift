@@ -22,10 +22,8 @@ struct MainScreenContainer: View {
                         alert: data.alert,
                         canaryDead: data.canaryDead,
                         alertShow: { data.alertShow = true },
-                        pushButton: { action, details, seedPhrase in data.pushButton(
-                            action: action,
-                            details: details,
-                            seedPhrase: seedPhrase
+                        pushButton: { action in data.pushButton(
+                            action: action
                         ) }
                     )
                     ZStack {
@@ -65,8 +63,8 @@ struct MainScreenContainer: View {
                             modalData: data.actionResult.modalData,
                             alert: data.alert,
                             alertShow: { data.alertShow = true },
-                            pushButton: { action, details, seedPhrase in data.pushButton(
-                                action: action, details: details, seedPhrase: seedPhrase
+                            pushButton: { action, details in data.pushButton(
+                                action: action, details: details
                             ) },
                             removeSeed: { seedName in data.removeSeed(seedName: seedName) },
                             restoreSeed: { seedName, seedPhrase, createSeedKeys in data.restoreSeed(
@@ -80,8 +78,8 @@ struct MainScreenContainer: View {
                             alertData: data.actionResult.alertData,
                             canaryDead: data.canaryDead,
                             resetAlert: data.resetAlert,
-                            pushButton: { action, details, seedPhrase in data.pushButton(
-                                action: action, details: details, seedPhrase: seedPhrase
+                            pushButton: { action in data.pushButton(
+                                action: action
                             ) }
                         )
                     }
@@ -96,8 +94,8 @@ struct MainScreenContainer: View {
                     if data.actionResult.footer {
                         Footer(
                             footerButton: data.actionResult.footerButton,
-                            pushButton: { action, details, seedPhrase in data.pushButton(
-                                action: action, details: details, seedPhrase: seedPhrase
+                            pushButton: { action in data.pushButton(
+                                action: action
                             ) }
                         )
                         .padding(.horizontal)

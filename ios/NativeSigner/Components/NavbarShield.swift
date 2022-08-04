@@ -11,11 +11,11 @@ import SwiftUI
 struct NavbarShield: View {
     let canaryDead: Bool
     let alert: Bool
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action) -> Void
     var body: some View {
         Button(
             action: {
-                pushButton(.shield, "", "")
+                pushButton(.shield)
             },
             label: {
                 if canaryDead /* bluetooth detector: `|| data.bsDetector.canaryDead` */ {

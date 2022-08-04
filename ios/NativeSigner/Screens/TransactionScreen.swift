@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TransactionScreen: View {
-    let pushButton: (Action, String, String) -> Void
+    let pushButton: (Action, String) -> Void
     var body: some View {
         CameraView(pushButton: pushButton)
     }
