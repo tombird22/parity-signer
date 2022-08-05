@@ -41,7 +41,7 @@ struct MainScreenContainer: View {
                                 doJailbreak: data.jailbreak,
                                 pathCheck: { seed, path, network in
                                     substratePathCheck(
-                                        seedName: seed, path: path, network: network, dbname: data.dbName
+                                        seedName: seed, path: path, network: network
                                     )
                                 },
                                 createAddress: { path, seedName in data.createAddress(path: path, seedName: seedName) },

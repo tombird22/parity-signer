@@ -165,15 +165,14 @@ extension SignerDataModel {
         if status == errSecSuccess {
             if backup {
                 do {
-                    try historySeedNameWasShown(seedName: seedName, dbname: dbName)
+                    try historySeedNameWasShown(seedName: seedName)
                 } catch {
                     print("Seed access logging error! This system is broken and should not be used anymore.")
                     // Attempt to log this anyway one last time;
                     // if this fails too - complain to joulu pukki
                     do {
                         try historyEntrySystem(
-                            event: .systemEntry(systemEntry: "Seed access logging failed!"),
-                            dbname: dbName
+                            event: .systemEntry(systemEntry: "Seed access logging failed!")
                         )
                     } catch {
                         logSuccess = false

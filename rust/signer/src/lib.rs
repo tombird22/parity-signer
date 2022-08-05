@@ -140,9 +140,8 @@ fn substrate_path_check(
     seed_name: &str,
     path: &str,
     network: &str,
-    dbname: &str,
 ) -> DerivationCheck {
-    db_handling::interface_signer::dynamic_path_check(dbname, seed_name, path, network)
+    db_handling::interface_signer::dynamic_path_check("", seed_name, path, network)
 }
 
 /// Must be called once on normal first start of the app upon accepting conditions; relies on old
@@ -161,30 +160,30 @@ fn history_init_history_no_cert(dbname: &str) -> anyhow::Result<(), String> {
 ///
 /// This changes log, so it is expected to fail all operations that check that database remained
 /// intact
-fn history_device_was_online(dbname: &str) -> anyhow::Result<(), String> {
-    db_handling::manage_history::device_was_online(dbname).map_err(|e| format!("{}", e))
+fn history_device_was_online() -> anyhow::Result<(), String> {
+    db_handling::manage_history::device_was_online("").map_err(|e| format!("{}", e))
 }
 
 /// Checks if network alert flag was set
-fn history_get_warnings(dbname: &str) -> anyhow::Result<bool, String> {
-    db_handling::helpers::get_danger_status(dbname).map_err(|e| format!("{}", e))
+fn history_get_warnings() -> anyhow::Result<bool, String> {
+    db_handling::helpers::get_danger_status("").map_err(|e| format!("{}", e))
 }
 
 /// Resets network alert flag; makes record of reset in log
-fn history_acknowledge_warnings(dbname: &str) -> anyhow::Result<(), String> {
-    db_handling::manage_history::reset_danger_status_to_safe(dbname).map_err(|e| format!("{}", e))
+fn history_acknowledge_warnings() -> anyhow::Result<(), String> {
+    db_handling::manage_history::reset_danger_status_to_safe("").map_err(|e| format!("{}", e))
 }
 
 /// Allows frontend to send events into log; TODO: maybe this is not needed
-fn history_entry_system(event: Event, dbname: &str) -> anyhow::Result<(), String> {
-    db_handling::manage_history::history_entry_system(dbname, event).map_err(|e| format!("{}", e))
+fn history_entry_system(event: Event) -> anyhow::Result<(), String> {
+    db_handling::manage_history::history_entry_system("", event).map_err(|e| format!("{}", e))
 }
 
 /// Must be called every time seed backup shows seed to user
 ///
 /// Makes record in log
-fn history_seed_name_was_shown(seed_name: &str, dbname: &str) -> anyhow::Result<(), String> {
-    db_handling::manage_history::seed_name_was_shown(dbname, seed_name.to_string())
+fn history_seed_name_was_shown(seed_name: &str) -> anyhow::Result<(), String> {
+    db_handling::manage_history::seed_name_was_shown("", seed_name.to_string())
         .map_err(|e| format!("{}", e))
 }
 

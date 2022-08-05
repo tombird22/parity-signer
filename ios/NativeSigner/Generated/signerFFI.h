@@ -46,79 +46,79 @@ typedef struct RustCallStatus {
 // ⚠️ increment the version suffix in all instances of UNIFFI_SHARED_HEADER_V4 in this file.           ⚠️
 #endif // def UNIFFI_SHARED_H
 
-RustBuffer signer_4a1d_action_get_name(
+RustBuffer signer_9a7_action_get_name(
       RustBuffer action,
     RustCallStatus *_Nonnull out_status
     );
-void signer_4a1d_init_navigation(
+void signer_9a7_init_navigation(
       RustBuffer dbname,RustBuffer seed_names,
     RustCallStatus *_Nonnull out_status
     );
-RustBuffer signer_4a1d_backend_action(
+RustBuffer signer_9a7_backend_action(
       RustBuffer action,RustBuffer details,RustBuffer seed_phrase,
     RustCallStatus *_Nonnull out_status
     );
-void signer_4a1d_update_seed_names(
+void signer_9a7_update_seed_names(
       RustBuffer seed_names,
     RustCallStatus *_Nonnull out_status
     );
-uint32_t signer_4a1d_qrparser_get_packets_total(
+uint32_t signer_9a7_qrparser_get_packets_total(
       RustBuffer data,int8_t cleaned,
     RustCallStatus *_Nonnull out_status
     );
-RustBuffer signer_4a1d_qrparser_try_decode_qr_sequence(
+RustBuffer signer_9a7_qrparser_try_decode_qr_sequence(
       RustBuffer data,int8_t cleaned,
     RustCallStatus *_Nonnull out_status
     );
-RustBuffer signer_4a1d_substrate_path_check(
-      RustBuffer seed_name,RustBuffer path,RustBuffer network,RustBuffer dbname,
+RustBuffer signer_9a7_substrate_path_check(
+      RustBuffer seed_name,RustBuffer path,RustBuffer network,
     RustCallStatus *_Nonnull out_status
     );
-void signer_4a1d_history_init_history_with_cert(
+void signer_9a7_history_init_history_with_cert(
       RustBuffer dbname,
     RustCallStatus *_Nonnull out_status
     );
-void signer_4a1d_history_init_history_no_cert(
+void signer_9a7_history_init_history_no_cert(
       RustBuffer dbname,
     RustCallStatus *_Nonnull out_status
     );
-void signer_4a1d_history_device_was_online(
-      RustBuffer dbname,
+void signer_9a7_history_device_was_online(
+      
     RustCallStatus *_Nonnull out_status
     );
-int8_t signer_4a1d_history_get_warnings(
-      RustBuffer dbname,
+int8_t signer_9a7_history_get_warnings(
+      
     RustCallStatus *_Nonnull out_status
     );
-void signer_4a1d_history_acknowledge_warnings(
-      RustBuffer dbname,
+void signer_9a7_history_acknowledge_warnings(
+      
     RustCallStatus *_Nonnull out_status
     );
-void signer_4a1d_history_entry_system(
-      RustBuffer event,RustBuffer dbname,
+void signer_9a7_history_entry_system(
+      RustBuffer event,
     RustCallStatus *_Nonnull out_status
     );
-void signer_4a1d_history_seed_name_was_shown(
-      RustBuffer seed_name,RustBuffer dbname,
+void signer_9a7_history_seed_name_was_shown(
+      RustBuffer seed_name,
     RustCallStatus *_Nonnull out_status
     );
-void signer_4a1d_init_logging(
+void signer_9a7_init_logging(
       RustBuffer tag,
     RustCallStatus *_Nonnull out_status
     );
-RustBuffer ffi_signer_4a1d_rustbuffer_alloc(
+RustBuffer ffi_signer_9a7_rustbuffer_alloc(
       int32_t size,
     RustCallStatus *_Nonnull out_status
     );
-RustBuffer ffi_signer_4a1d_rustbuffer_from_bytes(
+RustBuffer ffi_signer_9a7_rustbuffer_from_bytes(
       ForeignBytes bytes,
     RustCallStatus *_Nonnull out_status
     );
-void ffi_signer_4a1d_rustbuffer_free(
+void ffi_signer_9a7_rustbuffer_free(
       RustBuffer buf,
     RustCallStatus *_Nonnull out_status
     );
-RustBuffer ffi_signer_4a1d_rustbuffer_reserve(
+RustBuffer ffi_signer_9a7_rustbuffer_reserve(
       RustBuffer buf,int32_t additional,
     RustCallStatus *_Nonnull out_status
     );

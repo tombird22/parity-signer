@@ -15,7 +15,7 @@ extension SignerDataModel {
     func checkAlert() {
         if onboardingDone {
             do {
-                let res = try historyGetWarnings(dbname: dbName)
+                let res = try historyGetWarnings()
                 if res {
                     alert = true
                 } else {
@@ -31,7 +31,7 @@ extension SignerDataModel {
     /// Acknowledge alert and reset it
     func resetAlert() {
         do {
-            try historyAcknowledgeWarnings(dbname: dbName)
+            try historyAcknowledgeWarnings()
             checkAlert()
             pushButton(action: .goBack)
         } catch {

@@ -38,8 +38,6 @@ final class SignerDataModel: ObservableObject {
     @Published var alert: Bool = false
     @Published var alertShow: Bool = false
 
-    /// internal boilerplate
-    var dbName: String
     /// debouncer
     var actionAvailable = true
     /// Debounce time
@@ -64,7 +62,6 @@ final class SignerDataModel: ObservableObject {
         self.connectivityMonitor = connectivityMonitor
         self.databaseMediator = databaseMediator
         self.fileManager = fileManager
-        dbName = databaseMediator.databaseName
         onboardingDone = databaseMediator.isDatabaseAvailable()
 
         setUpConnectivityMonitoring()
@@ -96,16 +93,16 @@ final class SignerDataModel: ObservableObject {
         }
         do {
             if jailbreak {
-                try historyInitHistoryNoCert(dbname: dbName)
+                try historyInitHistoryNoCert(dbname: databaseMediator.databaseName)
             } else {
-                try historyInitHistoryWithCert(dbname: dbName)
+                try historyInitHistoryWithCert(dbname: databaseMediator.databaseName)
             }
             onboardingDone = true
             // Mean app mode:
             // if self.canaryDead {
             // device_was_online(nil, self.dbName)
             // }
-            initNavigation(dbname: dbName, seedNames: seedNames)
+            initNavigation(dbname: databaseMediator.databaseName, seedNames: seedNames)
             totalRefresh()
             refreshSeeds()
         } catch {
@@ -119,7 +116,7 @@ private extension SignerDataModel {
         connectivityMonitor.startMonitoring { isConnected in
             if isConnected, self.onboardingDone {
                 do {
-                    try historyDeviceWasOnline(dbname: self.dbName)
+                    try historyDeviceWasOnline()
                 } catch {
                     return
                 }
@@ -132,7 +129,7 @@ private extension SignerDataModel {
     func finaliseInitialisation() {
         guard onboardingDone else { return }
         refreshSeeds()
-        initNavigation(dbname: dbName, seedNames: seedNames)
+        initNavigation(dbname: databaseMediator.databaseName, seedNames: seedNames)
         totalRefresh()
     }
 }
@@ -152,7 +149,7 @@ extension SignerDataModel {
         databaseMediator.wipeDatabase()
         onboardingDone = false
         seedNames = []
-        initNavigation(dbname: dbName, seedNames: seedNames)
+        initNavigation(dbname: databaseMediator.databaseName, seedNames: seedNames)
     }
 }
 
